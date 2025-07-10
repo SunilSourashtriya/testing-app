@@ -38,8 +38,10 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
-  puts "== Allowed Hosts: #{Rails.application.config.hosts.inspect}"
-  config.hosts << "testing-app-llkp.onrender.com"
+  
+  if ENV["RENDER_EXTERNAL_HOSTNAME"].present?
+    config.hosts << ENV["RENDER_EXTERNAL_HOSTNAME"]
+  end
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
