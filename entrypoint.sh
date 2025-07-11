@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-# Remove old server PID file if exists (Rails doesn't like it)
+# Remove the server PID file if it exists (important for Rails restart)
 rm -f /docker_app/tmp/pids/server.pid
 
-# Run the Rails server with whatever CMD is passed
+# Run the main container command (defined in CMD)
 exec "$@"
