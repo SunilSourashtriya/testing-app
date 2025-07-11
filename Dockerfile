@@ -11,15 +11,8 @@ WORKDIR /docker_app
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
-# Copy everything else
+# Copy all other files
 COPY . .
 
-# Copy and set permissions for entrypoint
-COPY entrypoint.sh /usr/bin/entrypoint.sh
-RUN chmod +x /usr/bin/entrypoint.sh
-
-# Set entrypoint
-ENTRYPOINT ["/usr/bin/entrypoint.sh"]
-
-# Start Rails
-CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+# Start Rails server and ensure no stale PID file
+CMD ["bash", "-c", "rm -f tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0 -p 3000"]
