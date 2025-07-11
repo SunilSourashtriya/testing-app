@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
-rm -f /myapp/tmp/pids/server.pid
+rm -f /docker_app/tmp/pids/server.pid
 exec "$@"
